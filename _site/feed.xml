@@ -6,5 +6,14 @@
 		<link>/</link>
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
+			<item>
+				<title>Creating Polyglot Files</title>
+				<description>&lt;p&gt;I have recently stumbled upon&lt;/p&gt;
+</description>
+				<pubDate>Fri, 15 Nov 2013 00:00:00 -0600</pubDate>
+				<link>/general/demo/2013/11/15/hello-world.html</link>
+				<guid isPermaLink="true">/general/demo/2013/11/15/hello-world.html</guid>
+			</item>
+		
 	</channel>
 </rss>
