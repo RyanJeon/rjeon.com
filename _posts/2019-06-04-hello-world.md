@@ -12,6 +12,7 @@ helps me, because it allows me to reorganize myself and do the tasks better when
 Seriously, I encourage you to do the same.
 
 Anyways, I would like to share new things I find and learn during my sidetracks. I have been around this world about 20 years, but there are still a lot to learn and to be 
-excited about. Welcome to Ryan's sidetracks.
+excited about. So I invite you to learn with me. Whether my topics are new to you 
+or not, I hope you will find them amusing. Welcome to my sidetracks.
 
 ![Image description](https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg)
