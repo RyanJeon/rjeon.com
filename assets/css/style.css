@@ -2,6 +2,7 @@
 
 body{
 	color: #2c3e50;
+	background-color: white;
 }
 
 .sidebar {
@@ -97,6 +98,7 @@ article{
 .article_body{
 	margin-top: 20px;
 	margin-bottom: 20px;
+	font-size: 30px;
 }
 
 .post-date {

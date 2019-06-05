@@ -7,12 +7,37 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>Creating Polyglot Files</title>
-				<description>&lt;p&gt;I have recently stumbled upon&lt;/p&gt;
+				<title>\[SideTrack 1]\ Polyglot</title>
+				<description>&lt;p&gt;Whenever I find myself in a pile of tasks I need to do, I always take some time 
+to sidetrack myself. More often than not, taking a step back from all the busy work 
+helps me, because it allows me to reorganize myself and do the tasks better when I come back to them. Perhaps this is just an excuse to justify myself procrasinating, but in my opinion, taking an hour or two everyday to take a real break rather helps than not. 
+Seriously, I encourage you to do the same.&lt;/p&gt;
+
+&lt;p&gt;Anyways, I would like to share new things I find and learn during my sidetracks. I have been around this world about 20 years, but there are still a lot to learn and to be 
+excited about. Welcome to Ryan’s sidetracks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
 </description>
-				<pubDate>Fri, 15 Nov 2013 00:00:00 -0600</pubDate>
-				<link>/general/demo/2013/11/15/hello-world.html</link>
-				<guid isPermaLink="true">/general/demo/2013/11/15/hello-world.html</guid>
+				<pubDate>Wed, 05 Jun 2019 00:00:00 -0500</pubDate>
+				<link>/general/demo/2019/06/05/side1.html</link>
+				<guid isPermaLink="true">/general/demo/2019/06/05/side1.html</guid>
+			</item>
+		
+			<item>
+				<title>Sidetracks Prologue</title>
+				<description>&lt;p&gt;Whenever I find myself in a pile of tasks I need to do, I always take some time 
+to sidetrack myself. More often than not, taking a step back from all the busy work 
+helps me, because it allows me to reorganize myself and do the tasks better when I come back to them. Perhaps this is just an excuse to justify myself procrasinating, but in my opinion, taking an hour or two everyday to take a real break rather helps than not. 
+Seriously, I encourage you to do the same.&lt;/p&gt;
+
+&lt;p&gt;Anyways, I would like to share new things I find and learn during my sidetracks. I have been around this world about 20 years, but there are still a lot to learn and to be 
+excited about. Welcome to Ryan’s sidetracks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Tue, 04 Jun 2019 00:00:00 -0500</pubDate>
+				<link>/general/demo/2019/06/04/hello-world.html</link>
+				<guid isPermaLink="true">/general/demo/2019/06/04/hello-world.html</guid>
 			</item>
 		
 	</channel>
