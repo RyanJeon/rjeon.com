@@ -7,16 +7,70 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>\[SideTrack 1]\ Polyglot</title>
-				<description>&lt;p&gt;Whenever I find myself in a pile of tasks I need to do, I always take some time 
-to sidetrack myself. More often than not, taking a step back from all the busy work 
-helps me, because it allows me to reorganize myself and do the tasks better when I come back to them. Perhaps this is just an excuse to justify myself procrasinating, but in my opinion, taking an hour or two everyday to take a real break rather helps than not. 
-Seriously, I encourage you to do the same.&lt;/p&gt;
+				<title>(SideTrack 1) File Polyglot</title>
+				<description>&lt;p&gt;&lt;img src=&quot;http://illusion-investigation.weebly.com/uploads/2/4/2/2/24222135/6476083.jpg?306&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Anyways, I would like to share new things I find and learn during my sidetracks. I have been around this world about 20 years, but there are still a lot to learn and to be 
-excited about. Welcome to Ryan’s sidetracks.&lt;/p&gt;
+&lt;p&gt;During my usual sidetrack, I stumbled upon a quite amusing video through my colleague. 
+The video was covering a section of &lt;a href=&quot;https://nostarch.com/gtfo&quot;&gt;PoC || GTFO&lt;/a&gt;, which 
+was about a file polyglottery. Even though I was not able to find the original video I watched, &lt;a href=&quot;https://www.youtube.com/watch?time_continue=1166&amp;amp;v=fdKPnsWp9ho&quot;&gt;here&lt;/a&gt; is link to another video that covers the same topic. I encourage you to check it out. Just like what you might have guessed or already known, 
+polyglot files can be interpreted as multiple different file types. Just think about how many nasty exploits you can do with these polyglot files. How exciting! I couldn’t 
+help myself but to jump right into making one myself.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The first polyglot file that I attempted to make was a GIF + JS polyglot because it looked the most approachable and interesting. This &lt;a href=&quot;https://stegosploit.info/&quot;&gt;documentation&lt;/a&gt; that I found had a very thorough explanation of an approach. Learning step by step, I began by analyzing the byte format of GIF files. Image files 
+like PNG, JPEG, and GIF always begin with header bytes that contain meta data about 
+the files such as size of the file, the width of the image, and the height of the image. If an image file does not have a valid header, it can’t be correctly decoded and you won’t be able to see the image. So we need to figure out how to embed our JavaScript into our GIF file without corrupting the header of the GIF file. This is 
+the general format of GIF that I got from a &lt;a href=&quot;https://www.fileformat.info/format/gif/egff.htm&quot;&gt;source&lt;/a&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_GifHeader&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Header&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BYTE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;     &lt;span class=&quot;cm&quot;&gt;/* Header Signature (always &quot;GIF&quot;) */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BYTE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;       &lt;span class=&quot;cm&quot;&gt;/* GIF format version(&quot;87a&quot; or &quot;89a&quot;) */&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Logical Screen Descriptor&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;WORD&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ScreenWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;      &lt;span class=&quot;cm&quot;&gt;/* Width of Display Screen in Pixels */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;WORD&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ScreenHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;cm&quot;&gt;/* Height of Display Screen in Pixels */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BYTE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Packed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;           &lt;span class=&quot;cm&quot;&gt;/* Screen and Color Map Information */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BYTE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BackgroundColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;cm&quot;&gt;/* Background Color Index */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BYTE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AspectRatio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;      &lt;span class=&quot;cm&quot;&gt;/* Pixel Aspect Ratio */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GIFHEAD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As you can see, GIF file always start with a header signature “GIF” followed by 
+the GIF format version. Notice that these 6 bytes can be used as a valid JavaScript 
+variable? Even though we do not know if other succeeding bytes can be validly interpreted in common JavaScript compilers, we are certain that the first 6 bytes 
+will always be a valid JavaScript variable name. This means that we are good to go 
+as long as we can bypass the other bytes. The fact that the screen width comes right 
+after our golden 6 bytes is the key, because we can define the screen width with any 
+2 bytes and still have a valid GIF header. So we can comment out the whole garbage 
+bytes in the middle by setting our width to 0x2A2F (It will be a hell of a long GIF..) which translates to ‘/*’ and 
+adding 0x2F2A ‘*/’,  at the end of the file to create a valid JavaScript comment.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;    &lt;span class=&quot;nx&quot;&gt;GIF89a&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/*...... (GIF image data) .....*/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now to create a valid Javascript syntax, we can simply add ‘=SOME VALUE’ to 
+define the variable at the top of our file.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;    &lt;span class=&quot;nx&quot;&gt;GIF89a&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/*...... (GIF image data) .....*/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then we can append any JavaScript we want.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;    &lt;span class=&quot;nx&quot;&gt;GIF89a&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/*...... (GIF image data) .....*/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'This is cool!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;':)'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;With such polyglot, we can do crazy things like using the same GIF file to render the GIF image and execute customized script as well in most browsers. Given our example above, the 
+following HTML code will render our GIF, pop up an alert box, and log out ‘:)’.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;giphy.gif&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;giphy.gif&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And we are done … But are we? What if there are bytes in the middle of the image that 
+can translate into ‘*/’? This would surely break our method, because ‘/* */ */’ is not a valid JavaScript Syntax. Turns out, you will probably encounter ‘*/’ in the 
+middle of the image in most GIFs, given how many bytes there are in a common GIF file. 
+My attempt to bypass by removing and replacing the problematic bytes failed miserably, 
+as it corrupted the file enough to make it look glitchy. Perhaps this doesn’t matter in most use cases of such polyglot, because it still will be intepreted as GIF with a valid header and successfully deliver desired scripts as long as there’s no &lt;a href=&quot;https://en.wikipedia.org/wiki/Content_Disarm_%26_Reconstruction&quot;&gt;CDR&lt;/a&gt; present. Anyways, &lt;a href=&quot;https://github.com/RyanJeon/Polyglot&quot;&gt;here&lt;/a&gt; is the code that I wrote to assist generating polyglot files. Hope you found 
+this fun to explore as well.&lt;/p&gt;
 </description>
 				<pubDate>Wed, 05 Jun 2019 00:00:00 -0500</pubDate>
 				<link>/general/demo/2019/06/05/side1.html</link>
@@ -24,7 +78,7 @@ excited about. Welcome to Ryan’s sidetracks.&lt;/p&gt;
 			</item>
 		
 			<item>
-				<title>Sidetracks Prologue</title>
+				<title>(SideTrack 0) Prologue</title>
 				<description>&lt;p&gt;Whenever I find myself in a pile of tasks I need to do, I always take some time 
 to sidetrack myself. More often than not, taking a step back from all the busy work 
 helps me, because it allows me to reorganize myself and do the tasks better when I come back to them. Perhaps this is just an excuse to justify myself procrasinating, but in my opinion, taking an hour or two everyday to take a real break rather helps than not. 
@@ -34,7 +88,7 @@ Seriously, I encourage you to do the same.&lt;/p&gt;
 excited about. So I invite you to learn with me. Whether my topics are new to you 
 or not, I hope you will find them amusing. Welcome to my sidetracks.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg&quot; alt=&quot;gopher&quot; /&gt;&lt;/p&gt;
 </description>
 				<pubDate>Tue, 04 Jun 2019 00:00:00 -0500</pubDate>
 				<link>/general/demo/2019/06/04/hello-world.html</link>

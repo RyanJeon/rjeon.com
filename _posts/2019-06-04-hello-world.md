@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Sidetracks Prologue
+title: (SideTrack 0) Prologue
 categories: [general, demo]
 tags: [project, sidetrack]
 description: Whenever I find myself in a pile of tasks I need to do, I always take some time to sidetrack myself...
@@ -15,4 +15,4 @@ Anyways, I would like to share new things I find and learn during my sidetracks.
 excited about. So I invite you to learn with me. Whether my topics are new to you 
 or not, I hope you will find them amusing. Welcome to my sidetracks.
 
-![Image description](https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg)
+![gopher](https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg)

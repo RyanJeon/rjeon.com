@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Ryan's Little Home</title>
 	
-	<meta name="description" content="Whenever I find myself in a pile of tasks I need to do, I always take some time to sidetrack myself...">
+	<meta name="description" content="During my usual sidetrack, I stumbled upon a quite amusing video through my colleague. The video was covering a section of ...">
 	
 	<meta name="author" content="Ryan Jeon">
 
@@ -139,7 +139,7 @@
 
 	<div class="col-sm-9 col-sm-offset-3">
 		<div class="page-header">
-  <h1>\[SideTrack 1]\ Polyglot </h1>
+  <h1>(SideTrack 1) File Polyglot </h1>
 </div>
 	
 <article>
@@ -153,15 +153,69 @@
 	   2019
 	 </span>
 	  <div class="article_body" style="font-size: 30px">
-	  <p>Whenever I find myself in a pile of tasks I need to do, I always take some time 
-to sidetrack myself. More often than not, taking a step back from all the busy work 
-helps me, because it allows me to reorganize myself and do the tasks better when I come back to them. Perhaps this is just an excuse to justify myself procrasinating, but in my opinion, taking an hour or two everyday to take a real break rather helps than not. 
-Seriously, I encourage you to do the same.</p>
+	  <p><img src="http://illusion-investigation.weebly.com/uploads/2/4/2/2/24222135/6476083.jpg?306" alt="image" /></p>
 
-<p>Anyways, I would like to share new things I find and learn during my sidetracks. I have been around this world about 20 years, but there are still a lot to learn and to be 
-excited about. Welcome to Ryan’s sidetracks.</p>
+<p>During my usual sidetrack, I stumbled upon a quite amusing video through my colleague. 
+The video was covering a section of <a href="https://nostarch.com/gtfo">PoC || GTFO</a>, which 
+was about a file polyglottery. Even though I was not able to find the original video I watched, <a href="https://www.youtube.com/watch?time_continue=1166&amp;v=fdKPnsWp9ho">here</a> is link to another video that covers the same topic. I encourage you to check it out. Just like what you might have guessed or already known, 
+polyglot files can be interpreted as multiple different file types. Just think about how many nasty exploits you can do with these polyglot files. How exciting! I couldn’t 
+help myself but to jump right into making one myself.</p>
 
-<p><img src="https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg" alt="Image description" /></p>
+<p>The first polyglot file that I attempted to make was a GIF + JS polyglot because it looked the most approachable and interesting. This <a href="https://stegosploit.info/">documentation</a> that I found had a very thorough explanation of an approach. Learning step by step, I began by analyzing the byte format of GIF files. Image files 
+like PNG, JPEG, and GIF always begin with header bytes that contain meta data about 
+the files such as size of the file, the width of the image, and the height of the image. If an image file does not have a valid header, it can’t be correctly decoded and you won’t be able to see the image. So we need to figure out how to embed our JavaScript into our GIF file without corrupting the header of the GIF file. This is 
+the general format of GIF that I got from a <a href="https://www.fileformat.info/format/gif/egff.htm">source</a>:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_GifHeader</span>
+<span class="p">{</span>
+  <span class="c1">// Header</span>
+  <span class="n">BYTE</span> <span class="n">Signature</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>     <span class="cm">/* Header Signature (always "GIF") */</span>
+  <span class="n">BYTE</span> <span class="n">Version</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>       <span class="cm">/* GIF format version("87a" or "89a") */</span>
+  <span class="c1">// Logical Screen Descriptor</span>
+  <span class="n">WORD</span> <span class="n">ScreenWidth</span><span class="p">;</span>      <span class="cm">/* Width of Display Screen in Pixels */</span>
+  <span class="n">WORD</span> <span class="n">ScreenHeight</span><span class="p">;</span>     <span class="cm">/* Height of Display Screen in Pixels */</span>
+  <span class="n">BYTE</span> <span class="n">Packed</span><span class="p">;</span>           <span class="cm">/* Screen and Color Map Information */</span>
+  <span class="n">BYTE</span> <span class="n">BackgroundColor</span><span class="p">;</span>  <span class="cm">/* Background Color Index */</span>
+  <span class="n">BYTE</span> <span class="n">AspectRatio</span><span class="p">;</span>      <span class="cm">/* Pixel Aspect Ratio */</span>
+<span class="p">}</span> <span class="n">GIFHEAD</span><span class="p">;</span></code></pre></figure>
+
+<p>As you can see, GIF file always start with a header signature “GIF” followed by 
+the GIF format version. Notice that these 6 bytes can be used as a valid JavaScript 
+variable? Even though we do not know if other succeeding bytes can be validly interpreted in common JavaScript compilers, we are certain that the first 6 bytes 
+will always be a valid JavaScript variable name. This means that we are good to go 
+as long as we can bypass the other bytes. The fact that the screen width comes right 
+after our golden 6 bytes is the key, because we can define the screen width with any 
+2 bytes and still have a valid GIF header. So we can comment out the whole garbage 
+bytes in the middle by setting our width to 0x2A2F (It will be a hell of a long GIF..) which translates to ‘/*’ and 
+adding 0x2F2A ‘*/’,  at the end of the file to create a valid JavaScript comment.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="nx">GIF89a</span><span class="cm">/*...... (GIF image data) .....*/</span></code></pre></figure>
+
+<p>Now to create a valid Javascript syntax, we can simply add ‘=SOME VALUE’ to 
+define the variable at the top of our file.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="nx">GIF89a</span><span class="cm">/*...... (GIF image data) .....*/</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span></code></pre></figure>
+
+<p>Then we can append any JavaScript we want.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="nx">GIF89a</span><span class="cm">/*...... (GIF image data) .....*/</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'This is cool!'</span><span class="p">);</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">':)'</span><span class="p">));</span></code></pre></figure>
+
+<p>With such polyglot, we can do crazy things like using the same GIF file to render the GIF image and execute customized script as well in most browsers. Given our example above, the 
+following HTML code will render our GIF, pop up an alert box, and log out ‘:)’.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">    <span class="nt">&lt;html&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"giphy.gif"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"giphy.gif"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+<p>And we are done … But are we? What if there are bytes in the middle of the image that 
+can translate into ‘*/’? This would surely break our method, because ‘/* */ */’ is not a valid JavaScript Syntax. Turns out, you will probably encounter ‘*/’ in the 
+middle of the image in most GIFs, given how many bytes there are in a common GIF file. 
+My attempt to bypass by removing and replacing the problematic bytes failed miserably, 
+as it corrupted the file enough to make it look glitchy. Perhaps this doesn’t matter in most use cases of such polyglot, because it still will be intepreted as GIF with a valid header and successfully deliver desired scripts as long as there’s no <a href="https://en.wikipedia.org/wiki/Content_Disarm_%26_Reconstruction">CDR</a> present. Anyways, <a href="https://github.com/RyanJeon/Polyglot">here</a> is the code that I wrote to assist generating polyglot files. Hope you found 
+this fun to explore as well.</p>
 
 	  </div>
 
@@ -215,7 +269,7 @@ excited about. Welcome to Ryan’s sidetracks.</p>
 		<div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=\[SideTrack 1]\ Polyglot"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=(SideTrack 1) File Polyglot"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -243,7 +297,7 @@ excited about. Welcome to Ryan’s sidetracks.</p>
 
 		<ul class="pager">
 		  
-		  <li class="previous"><a href="/general/demo/2019/06/04/hello-world.html" title="Sidetracks Prologue">&larr; Previous</a></li>
+		  <li class="previous"><a href="/general/demo/2019/06/04/hello-world.html" title="(SideTrack 0) Prologue">&larr; Previous</a></li>
 		  
 		  
 			<li class="next disabled"><a>Next &rarr;</a>
