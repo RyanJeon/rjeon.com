@@ -37,7 +37,7 @@ port that will be used on your VM instance to be fowarded to your Pi's port 22 (
 gcloud compute --project "PROJECT_NAME" ssh --zone "VM_REGION" "VM_NAME" -- -f -N -R REMOTE_PORT:localhost:22
 {% endhighlight %}
 A brief explanation of the command flags: 
-* -f: This runs SSH sessiondto run in the background
+* -f: This runs SSH session to run in the background
 * -N: Does not open a shell or execute program on the remote host
 * -R: Creates a remote tunnel to your local machine (Your Pi)
 
