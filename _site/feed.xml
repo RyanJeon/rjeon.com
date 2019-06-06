@@ -78,6 +78,15 @@ this fun to explore as well.&lt;/p&gt;
 			</item>
 		
 			<item>
+				<title>SSH into RaspberryPi through GCP VM instance</title>
+				<description>
+</description>
+				<pubDate>Wed, 05 Jun 2019 00:00:00 -0500</pubDate>
+				<link>/general/demo/2019/06/05/ssh-raspberrypi.html</link>
+				<guid isPermaLink="true">/general/demo/2019/06/05/ssh-raspberrypi.html</guid>
+			</item>
+		
+			<item>
 				<title>(SideTrack 0) Prologue</title>
 				<description>&lt;p&gt;Whenever I find myself in a pile of tasks I need to do, I always take some time 
 to sidetrack myself. More often than not, taking a step back from all the busy work 
