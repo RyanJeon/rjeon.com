@@ -7,6 +7,54 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>SSH into RaspberryPi through GCP VM instance</title>
+				<description>&lt;p&gt;About a month ago I got my first ever personal RaspberryPi. Just like a kid who just got his 
+first bike, I was filled with joy and excitement and wanted to play with it 24/7. But as a 
+full time student, I was often far from home, and I had to contain myself from running back to my 
+apartment to play with my Pi. I found a good solution to tackle this. I decided create a 
+reverse SSH tunnel from my Pi to a GCP VM instance, so that I can SSH into my Pi from the VM already had remote access to.
+This is very useful, because the alternative would have been port fowarding on my home router and 
+this often is very cumbersome to do and manage. So let me share how I did it.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+First, create a GCP VM instance if you do not already have one following this &lt;a href=&quot;https://cloud.google.com/compute/docs/instances/create-start-instance&quot;&gt;guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, Make sure you have gcloud sdk on your Pi. If not, you can install it with these commands:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;cp&quot;&gt;# Create environment variable for correct distribution
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;CLOUD_SDK_REPO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cloud-sdk-$(grep VERSION_CODENAME /etc/os-release | cut -d '=' -f 2)&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;cp&quot;&gt;# Add the Cloud SDK distribution URI as a package source
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sources&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cloud&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sdk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;
+
+    &lt;span class=&quot;cp&quot;&gt;# Import the Google Cloud Platform public key
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;curl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -&lt;/span&gt;
+
+    &lt;span class=&quot;cp&quot;&gt;# Update the package list and install the Cloud SDK
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cloud&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sdk&lt;/span&gt;
+    &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now, from your Pi, type the following command to create a reverse SSH tunnel to your VM instance. The REMOTE_PORT value will be the 
+port that will be used on your VM instance to be fowarded to your Pi’s port 22 (Default SSH port)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;n&quot;&gt;gcloud&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;project&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;PROJECT_NAME&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ssh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zone&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;VM_REGION&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;VM_NAME&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;REMOTE_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;A brief explanation of the command flags:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;-f: This runs SSH sessiondto run in the background&lt;/li&gt;
+  &lt;li&gt;-N: Does not open a shell or execute program on the remote host&lt;/li&gt;
+  &lt;li&gt;-R: Creates a remote tunnel to your local machine (Your Pi)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s it! Now just simply SSH into the port that you chose, and you can now access your Pi from anywhere around the world as long as 
+your Pi is running and safe at home. Happy hacking!&lt;/p&gt;
+</description>
+				<pubDate>Thu, 06 Jun 2019 00:00:00 -0500</pubDate>
+				<link>/general/demo/2019/06/06/ssh-raspberrypi.html</link>
+				<guid isPermaLink="true">/general/demo/2019/06/06/ssh-raspberrypi.html</guid>
+			</item>
+		
+			<item>
 				<title>(SideTrack 1) File Polyglot</title>
 				<description>&lt;p&gt;&lt;img src=&quot;http://illusion-investigation.weebly.com/uploads/2/4/2/2/24222135/6476083.jpg?306&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
 
@@ -75,15 +123,6 @@ this fun to explore as well.&lt;/p&gt;
 				<pubDate>Wed, 05 Jun 2019 00:00:00 -0500</pubDate>
 				<link>/general/demo/2019/06/05/side1.html</link>
 				<guid isPermaLink="true">/general/demo/2019/06/05/side1.html</guid>
-			</item>
-		
-			<item>
-				<title>SSH into RaspberryPi through GCP VM instance</title>
-				<description>
-</description>
-				<pubDate>Wed, 05 Jun 2019 00:00:00 -0500</pubDate>
-				<link>/general/demo/2019/06/05/ssh-raspberrypi.html</link>
-				<guid isPermaLink="true">/general/demo/2019/06/05/ssh-raspberrypi.html</guid>
 			</item>
 		
 			<item>
