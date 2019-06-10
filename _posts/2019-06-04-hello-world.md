@@ -3,7 +3,7 @@ layout: post
 title: (SideTrack 0) Prologue
 categories: [general, demo]
 tags: [project, sidetrack]
-description: Whenever I find myself in a pile of tasks I need to do, I always take some time to sidetrack myself...
+description:
 ---
 
 Whenever I find myself in a pile of tasks I need to do, I always take some time 

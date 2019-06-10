@@ -3,7 +3,7 @@ layout: post
 title: SSH into RaspberryPi through GCP VM instance
 categories: [general, demo]
 tags: [project, tutorial]
-description: About a month ago I got my first ever personal RaspberryPi. Just like a kid who just got his first bike, I was filled with joy and excitement and wanted to play with it ...
+description:
 ---
 
 About a month ago I got my first ever personal RaspberryPi. Just like a kid who just got his 

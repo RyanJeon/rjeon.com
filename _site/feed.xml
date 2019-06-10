@@ -7,6 +7,44 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Writing a programming language (Part 1 Layout)</title>
+				<description>&lt;p&gt;Some people say they either don’t have enough time to work on side projects  or actually do not have time to work on them. 
+But this is not the case for me. Turns out I have a lot of time just laying around so I decided to work on something big that 
+I can learn a bunch from. It didn’t take me long until I decided to learn how to create my own programming language. How did I 
+arrive at that? I mean, I would definitely learn a lot from working on a compiler and having my own programming language sounds 
+exciting doesn’t it? A few weeks back I started learning Golang. So I decided to write my language in Golang.&lt;/p&gt;
+
+&lt;p&gt;First, I researched how I should structure my compiler. Here is a good compiler diagram that I found online:
+&lt;img src=&quot;https://cdn-images-1.medium.com/max/800/1*ttOYPPL-XJIf4zVZQUBzsQ.jpeg&quot; alt=&quot;compiler&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Following this diagram, you pass in a piece of code to a compiler it goes through a Lexer, where 
+the input string split into keyword strings, that are then turn into tokens that will contain information about the keywords. For example, if you have 
+a piece of code like:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;One example output that a Lexer might produce is “print”, “(“, “1”, “+”, “1”. These strings 
+can be then turned into tokens. An example of list of tokens you could make from this list of 
+strings might be:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;print&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Function&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;(&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Operator&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Integer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;+&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Operator&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Integer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Operator&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The way you design your token is entirely upto how you want to design your compiler.&lt;/p&gt;
+
+&lt;p&gt;Then these tokens will get sent to the parser, where AST (Abstract Syntax Tree) will be generated with the given tokens. Depending on 
+the grammar that your compiler follows, the parser will produce a corresponding AST. An example of AST of above example might look like: 
+&lt;img src=&quot;https://i.imgur.com/eG3FJgW.png?1&quot; alt=&quot;AST&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, this AST will be interpreted and produce a corresponding assembly, which can be 
+compiled down to an executable that you can run on your machine. I am planning to follow this 
+structure closely. Let’s see what we get :).&lt;/p&gt;
+</description>
+				<pubDate>Mon, 10 Jun 2019 00:00:00 -0500</pubDate>
+				<link>/general/coding/2019/06/10/compiler1.html</link>
+				<guid isPermaLink="true">/general/coding/2019/06/10/compiler1.html</guid>
+			</item>
+		
+			<item>
 				<title>SSH into RaspberryPi through GCP VM instance</title>
 				<description>&lt;p&gt;About a month ago I got my first ever personal RaspberryPi. Just like a kid who just got his 
 first bike, I was filled with joy and excitement and wanted to play with it 24/7. But as a 
@@ -41,7 +79,7 @@ port that will be used on your VM instance to be fowarded to your Pi’s port 22
 
 &lt;p&gt;A brief explanation of the command flags:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;-f: This runs SSH sessiondto run in the background&lt;/li&gt;
+  &lt;li&gt;-f: This runs SSH session to run in the background&lt;/li&gt;
   &lt;li&gt;-N: Does not open a shell or execute program on the remote host&lt;/li&gt;
   &lt;li&gt;-R: Creates a remote tunnel to your local machine (Your Pi)&lt;/li&gt;
 &lt;/ul&gt;

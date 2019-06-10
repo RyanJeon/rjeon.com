@@ -137,7 +137,7 @@
 
 	<div class="col-sm-9 col-sm-offset-3">
 		<div class="page-header">
-  <h1>(SideTrack 0) Prologue </h1>
+  <h1>Writing a programming language (Part 1 Layout) </h1>
 </div>
 	
 <article>
@@ -146,21 +146,41 @@
 	 <span class="post-date">
 	   
 	   June 
-	   4th,
+	   10th,
 	   
 	   2019
 	 </span>
 	  <div class="article_body" style="font-size: 30px">
-	  <p>Whenever I find myself in a pile of tasks I need to do, I always take some time 
-to sidetrack myself. More often than not, taking a step back from all the busy work 
-helps me, because it allows me to reorganize myself and do the tasks better when I come back to them. Perhaps this is just an excuse to justify myself procrasinating, but in my opinion, taking an hour or two everyday to take a real break rather helps than not. 
-Seriously, I encourage you to do the same.</p>
+	  <p>Some people say they either don’t have enough time to work on side projects  or actually do not have time to work on them. 
+But this is not the case for me. Turns out I have a lot of time just laying around so I decided to work on something big that 
+I can learn a bunch from. It didn’t take me long until I decided to learn how to create my own programming language. How did I 
+arrive at that? I mean, I would definitely learn a lot from working on a compiler and having my own programming language sounds 
+exciting doesn’t it? A few weeks back I started learning Golang. So I decided to write my language in Golang.</p>
 
-<p>Anyways, I would like to share new things I find and learn during my sidetracks. I have been around this world about 20 years, but there are still a lot to learn and to be 
-excited about. So I invite you to learn with me. Whether my topics are new to you 
-or not, I hope you will find them amusing. Welcome to my sidetracks.</p>
+<p>First, I researched how I should structure my compiler. Here is a good compiler diagram that I found online:
+<img src="https://cdn-images-1.medium.com/max/800/1*ttOYPPL-XJIf4zVZQUBzsQ.jpeg" alt="compiler" /></p>
 
-<p><img src="https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg" alt="gopher" /></p>
+<p>Following this diagram, you pass in a piece of code to a compiler it goes through a Lexer, where 
+the input string split into keyword strings, that are then turn into tokens that will contain information about the keywords. For example, if you have 
+a piece of code like:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre></figure>
+
+<p>One example output that a Lexer might produce is “print”, “(“, “1”, “+”, “1”. These strings 
+can be then turned into tokens. An example of list of tokens you could make from this list of 
+strings might be:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">[{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"print"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Function"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"("</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Operator"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"1"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Integer"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"+"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Operator"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"1"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Integer"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">")"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Operator"</span><span class="p">}]</span></code></pre></figure>
+
+<p>The way you design your token is entirely upto how you want to design your compiler.</p>
+
+<p>Then these tokens will get sent to the parser, where AST (Abstract Syntax Tree) will be generated with the given tokens. Depending on 
+the grammar that your compiler follows, the parser will produce a corresponding AST. An example of AST of above example might look like: 
+<img src="https://i.imgur.com/eG3FJgW.png?1" alt="AST" /></p>
+
+<p>Finally, this AST will be interpreted and produce a corresponding assembly, which can be 
+compiled down to an executable that you can run on your machine. I am planning to follow this 
+structure closely. Let’s see what we get :).</p>
 
 	  </div>
 
@@ -175,8 +195,8 @@ or not, I hope you will find them amusing. Welcome to my sidetracks.</p>
 					,
 				</a></li>
 			 
-				<li><a href="/categories.html#demo-ref">
-					demo <span>(3)</span>
+				<li><a href="/categories.html#coding-ref">
+					coding <span>(1)</span>
 					
 				</a></li>
 			
@@ -198,8 +218,8 @@ or not, I hope you will find them amusing. Welcome to my sidetracks.</p>
 				</li>
 			 
 				<li>
-					<a href="/tags.html#sidetrack-ref">
-					sidetrack <span>(2)</span>
+					<a href="/tags.html#compiler-ref">
+					compiler <span>(1)</span>
 					
 					</a>
 				</li>
@@ -214,7 +234,7 @@ or not, I hope you will find them amusing. Welcome to my sidetracks.</p>
 		<div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=(SideTrack 0) Prologue"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Writing a programming language (Part 1 Layout)"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -242,10 +262,10 @@ or not, I hope you will find them amusing. Welcome to my sidetracks.</p>
 
 		<ul class="pager">
 		  
-		  <li class="previous disabled"><a>&larr; Previous</a></li>
+		  <li class="previous"><a href="/general/demo/2019/06/06/ssh-raspberrypi.html" title="SSH into RaspberryPi through GCP VM instance">&larr; Previous</a></li>
 		  
 		  
-		  <li class="next"><a href="/general/demo/2019/06/05/side1.html" title="(SideTrack 1) File Polyglot">Next &rarr;</a></li>
+			<li class="next disabled"><a>Next &rarr;</a>
 		  
 		</ul>
 
