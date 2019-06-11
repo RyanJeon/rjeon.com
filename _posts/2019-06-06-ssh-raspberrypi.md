@@ -9,8 +9,8 @@ description:
 About a month ago I got my first ever personal RaspberryPi. Just like a kid who just got his 
 first bike, I was filled with joy and excitement and wanted to play with it 24/7. But as a 
 full time student, I was often far from home, and I had to contain myself from running back to my 
-apartment to play with my Pi. I found a good solution to tackle this. I decided create a 
-reverse SSH tunnel from my Pi to a GCP VM instance, so that I can SSH into my Pi from the VM already had remote access to.
+apartment to play with my Pi. I found a good solution to tackle this. I decided to create a 
+reverse SSH tunnel from my Pi to a GCP VM instance, so that I can SSH into my Pi from the VM I already had remote access to.
 This is very useful, because the alternative would have been port fowarding on my home router and 
 this often is very cumbersome to do and manage. So let me share how I did it.
 
