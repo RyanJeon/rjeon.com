@@ -6,7 +6,7 @@ exclude: ["README.md"] # files to exclude
 highlighter: rouge
 markdown: kramdown
 disqus: Ryan Jeon
-google_analytics: Ryan
+google_analytics: UA-142682001-1
 title: Ryan Jeon
 
 defaults:
