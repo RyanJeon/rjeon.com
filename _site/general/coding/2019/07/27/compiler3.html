@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Writing a programming language (Part 3 Local Variables)</title>
+	
+	<meta name="author" content="Ryan Jeon">
+
+	<!-- Enable responsive viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Le styles -->
+	<link href="/assets/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/assets/resources/syntax/syntax.css" rel="stylesheet">
+	<link href="/assets/css/style.css" rel="stylesheet">
+
+	<!-- Le fav and touch icons -->
+	<link rel="shortcut icon" href="pingu.png">
+	<!--	
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	-->
+
+
+	<link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+</head>
+
+<body>
+	<nav class="navbar navbar-default visible-xs" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+			<a type="button" class="navbar-toggle nav-link" href="http://github.com/ryanjeon">
+				<i class="fa fa-github"></i>
+			</a>
+			
+			
+			
+			<a type="button" class="navbar-toggle nav-link" href="mailto:ryanjeon98@gmail.com">
+				<i class="fa fa-envelope"></i>
+			</a>
+			
+			<a class="navbar-brand" href="/">
+				<img src="https://s.gravatar.com/avatar/e687cb78cf4a1242610b00314122ce64?s=40" class="img-circle" />
+				Ryan Jeon
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="/categories.html">Categories</a></li>
+				<li><a href="/tags.html">Tags</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+
+	<!-- nav-menu-dropdown -->
+	<div class="btn-group hidden-xs" id="nav-menu">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			<i class="fa fa-bars"></i>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+			<li class="divider"></li>
+			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
+		</ul>
+	</div>
+
+	<div class="col-sm-3 sidebar hidden-xs" style="">
+		<!-- sidebar.html -->
+<header class="sidebar-header" role="banner">
+	<a href="/">
+		<img src="https://s.gravatar.com/avatar/e687cb78cf4a1242610b00314122ce64?s=200" class="img-circle" />
+	</a>
+	<h3 class="title">
+        <a href="/">Ryan Jeon</a>
+    </h3>
+</header>
+
+
+<div id="bio" class="text-center">
+	I'm a software developer and a student. I am mainly interested in exploits and application development :)
+</div>
+
+
+<div id="contact-list" class="text-center">
+	<div>
+		<a class="btn btn-default btn-sm" style="margin:10px" href="/about.html">
+			More About Me
+		</a>
+	</div>
+	<ul class="list-unstyled list-inline">
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="https://github.com/ryanjeon">
+				<i class="fa fa-github-alt fa-lg"></i>
+			</a>
+		</li>
+		
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="mailto:ryanjeon98@gmail.com">
+				<i class="fa fa-envelope fa-lg"></i>
+			</a>
+		</li>
+		
+	</ul>
+	<ul id="contact-list-secondary" class="list-unstyled list-inline">
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="https://linkedin.com/in/ryan-yejun-jeon-70b4a7145">
+				<i class="fa fa-linkedin fa-lg"></i>
+			</a>
+		</li>
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="/feed.xml">
+				<i class="fa fa-rss fa-lg"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+<!-- sidebar.html end -->
+
+	</div>
+
+	<div class="col-sm-9 col-sm-offset-3">
+		<div class="page-header">
+  <h1>Writing a programming language (Part 3 Local Variables) </h1>
+</div>
+
+
+<article>
+
+	<div class="col-sm-10">
+	 <span class="post-date">
+	   
+	   July 
+	   27th,
+	   
+	   2019
+	 </span>
+	  <div class="article_body" style="font-size: 20px">
+	  <p><a href="https://github.com/RyanJeon/RyanLang">Compiler Repo</a></p>
+
+<p>It’s been more than a month since I posted a last update on my compiler. Even though I had a very hectic month, I was able to make some breakthrough. I was able to implement a basic conditional, arithmetic operations, variable declaration, and function declaration/calls that allowed rlang to finally perform a recursive fibonacci algorithm:</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">fibo</span><span class="o">.</span><span class="n">rlang</span><span class="x">
+
+</span><span class="n">Int</span><span class="x"> </span><span class="n">fib</span><span class="x"> </span><span class="o">=&gt;</span><span class="x"> </span><span class="n">Int</span><span class="x"> </span><span class="n">a</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="n">Int</span><span class="x"> </span><span class="n">b</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="n">Int</span><span class="x"> </span><span class="n">ctr</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="n">Int</span><span class="x"> </span><span class="n">limit</span><span class="x">
+    </span><span class="k">if</span><span class="x"> </span><span class="n">ctr</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="m">20</span><span class="x"> </span><span class="o">=&gt;</span><span class="x">
+        </span><span class="k">return</span><span class="x"> </span><span class="m">2</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="n">Int</span><span class="x"> </span><span class="n">c</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">a</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">b</span><span class="x">
+    </span><span class="nb">print</span><span class="x"> </span><span class="p">(</span><span class="x"> </span><span class="n">c</span><span class="x"> </span><span class="p">)</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">fib</span><span class="x"> </span><span class="p">(</span><span class="x"> </span><span class="n">b</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="n">c</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="n">ctr</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">1</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="n">limit</span><span class="x"> </span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span><span class="n">Int</span><span class="x"> </span><span class="n">execute</span><span class="x"> </span><span class="o">=&gt;</span><span class="x">
+    </span><span class="n">Int</span><span class="x"> </span><span class="n">a</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">fib</span><span class="x"> </span><span class="p">(</span><span class="x"> </span><span class="m">1</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="m">1</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="m">0</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="m">5</span><span class="x"> </span><span class="p">)</span><span class="x">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Above algorithm will print the first 20 numbers in fibonacci sequence. Along this journey, one thing that I found very interesting was how you can use a stack to hold local variables in functions and access the variables using RBP register. Let’s take a look at an example.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">Int</span><span class="x"> </span><span class="n">a</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="m">2</span></code></pre></figure>
+
+<p>Here, we push the value 2 on our stack to access the value later when the variable is used. Then, we push our RBP address on our stack to save the original RBP address to restore when the program is done. After that, we can move our current RSP address to RBP and now our value 2 is accessible on the address RBP + 8 (given that RBP address is 8 bytes). Here is the diagram of what our stack looks like.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="x">	</span><span class="p">[</span><span class="x"> </span><span class="n">ret</span><span class="x"> </span><span class="n">add</span><span class="x"> </span><span class="p">]</span><span class="x">      </span><span class="n">rbp</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">16</span><span class="x">
+	</span><span class="p">[</span><span class="x">    </span><span class="m">2</span><span class="x">    </span><span class="p">]</span><span class="x">      </span><span class="n">rbp</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">8</span><span class="x">
+	</span><span class="p">[</span><span class="x"> </span><span class="n">RBP</span><span class="x"> </span><span class="n">add</span><span class="x"> </span><span class="p">]</span><span class="x">  </span><span class="o">&lt;==</span><span class="x"> </span><span class="n">rsp</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="n">rbp</span></code></pre></figure>
+
+<p>When we add another local variable, we simply update our RBP address, while we keep the original RBP address on top of our stack.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">Int</span><span class="x"> </span><span class="n">a</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="m">2</span><span class="x">
+</span><span class="n">Int</span><span class="x"> </span><span class="n">b</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="m">3</span></code></pre></figure>
+
+<p>Would produce:</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="x">	</span><span class="p">[</span><span class="x"> </span><span class="n">ret</span><span class="x"> </span><span class="n">add</span><span class="x"> </span><span class="p">]</span><span class="x">      </span><span class="n">rbp</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">24</span><span class="x">
+	</span><span class="p">[</span><span class="x">    </span><span class="m">2</span><span class="x">    </span><span class="p">]</span><span class="x">      </span><span class="n">rbp</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">16</span><span class="x">
+	</span><span class="p">[</span><span class="x">    </span><span class="m">3</span><span class="x">    </span><span class="p">]</span><span class="x">      </span><span class="n">rbp</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">8</span><span class="x">
+	</span><span class="p">[</span><span class="x"> </span><span class="n">RBP</span><span class="x"> </span><span class="n">add</span><span class="x"> </span><span class="p">]</span><span class="x">  </span><span class="o">&lt;==</span><span class="x"> </span><span class="n">rsp</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="n">rbp</span></code></pre></figure>
+
+<p>So every time you want to store a local variable, you can use this code given x86-64 instruction set.</p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">movq	$(Value of variable), %rax 		   //Store the value in rax
+popq	%rbp					   //Restore RBP address
+pushq	%rax					   //Push the value on the stack
+pushq	%rbp					   //Push the RBP address to save the original address
+movq	%rsp, %rbp				   //Update RBP address to top of the stack</code></pre></figure>
+
+<p>And to access our variable, we can simply do RBP relative addressing</p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">movq	8(%rbp), %rax		//This will give you the value of the latest declared  variable</code></pre></figure>
+
+<p>In the compiler implementation, I decided to keep a dictionary with variable name as key and stack offset as value to keep track of where my variable is located at, when you need to access that variable later on.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="c">// Storing variable</span><span class="x">
+</span><span class="n">LocalVariable</span><span class="p">[</span><span class="n">variableName</span><span class="p">]</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">stackindex</span><span class="x">
+</span><span class="n">stackindex</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">stackindex</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">8</span><span class="x">
+
+</span><span class="c">/*	
+	With our previous example..
+	Int a = 2
+	Int b = 3
+
+	LocalVariable map would look like
+	[ a : 8 , b : 16 ]
+*/</span><span class="x">
+
+</span><span class="c">// Accessing variable</span><span class="x">
+</span><span class="n">offset</span><span class="p">,</span><span class="x"> </span><span class="n">exist</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">LocalVariable</span><span class="p">[</span><span class="kt">string</span><span class="p">((</span><span class="o">*</span><span class="n">tree</span><span class="p">)</span><span class="o">.</span><span class="n">Value</span><span class="p">)]</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="o">!</span><span class="n">exist</span><span class="x"> </span><span class="p">{</span><span class="x">
+	</span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"Variable %s is not declared!"</span><span class="p">,</span><span class="x"> </span><span class="p">(</span><span class="o">*</span><span class="n">tree</span><span class="p">)</span><span class="o">.</span><span class="n">Value</span><span class="p">)</span><span class="x">
+	</span><span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">index</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">LocalVariable</span><span class="p">)</span><span class="o">+</span><span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="m">8</span><span class="x"> </span><span class="o">-</span><span class="x"> </span><span class="n">offset</span><span class="x">
+</span><span class="n">code</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"movq	%d(%%rbp), %%rax</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="x"> </span><span class="n">index</span><span class="p">)</span><span class="x">
+</span><span class="n">WriteToFile</span><span class="p">(</span><span class="n">code</span><span class="p">)</span></code></pre></figure>
+
+<p>Ain’t that neat? Some of you might ask, why would we use RBP instead of RSP when our RSP will always be point to the top of our stack? I was thinking that too in the beginning. However, it made more sense when I thought about what could happen to RSP as you do more things such as making a function call. When you make a function call, you are pushing a return address to the stack, and within that function call you might be declaring more local variables within that function. Long story short, RSP is too dynamic for it to be a used as a consistent base address to reference local variables on the stack. Thus, making a use of RBP really makes our life easier, since RBP address will always be consistent.</p>
+
+<p>There’s still a lot to be done, but I am also having a lot of fun. As always, I will keep you posted on the progress :). Have a good day.</p>
+
+	  </div>
+
+		
+		<ul class="tag_box list-unstyled list-inline">
+		  <li><i class="fa fa-folder-open"></i></li>
+		  
+		  
+			 
+				<li><a href="/categories.html#general-ref">
+					general <span>(6)</span>
+					,
+				</a></li>
+			 
+				<li><a href="/categories.html#coding-ref">
+					coding <span>(3)</span>
+					
+				</a></li>
+			
+		  
+		</ul>
+		  
+
+		
+		<ul class="list-inline">
+		  <li><i class="fa fa-tags"></i></li>
+		  
+		  
+			 
+				<li>
+					<a href="/tags.html#project-ref">
+					project <span>(6)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#compiler-ref">
+					compiler <span>(3)</span>
+					
+					</a>
+				</li>
+			
+		  
+		  
+		</ul>
+		  
+
+		<hr>
+
+		<div>
+      <section class="share col-sm-6">
+        <h4 class="section-title">Share Post</h4>
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Writing a programming language (Part 3 Local Variables)"
+           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <i class="fa fa-twitter fa-lg"></i>
+          Twitter
+        </a>
+        <a class="btn btn-default btn-sm facebook" href="https://www.facebook.com/sharer/sharer.php"
+           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <i class="fa fa-facebook fa-lg"></i>
+          Facebook
+        </a>
+        <a class="btn btn-default btn-sm gplus"
+           onclick="window.open('https://plus.google.com/share?url='+window.location.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <i class="fa fa-google-plus fa-lg"></i>
+          Google+
+        </a>
+      </section>
+
+      <section class="col-sm-6 author">
+        <img src="//www.gravatar.com/avatar/e687cb78cf4a1242610b00314122ce64" class="img-rounded author-image" />
+        <h4 class="section-title author-name">Ryan Jeon</h4>
+        <p class="author-bio">I'm a software developer and a student. I am mainly interested in exploits and application development :)</p>
+      </section>
+    </div>
+
+    <div class="clearfix"></div>
+
+		<ul class="pager">
+		  
+		  <li class="previous"><a href="/general/coding/2019/06/23/compiler2.html" title="Writing a programming language (Part 2 Lexer)">&larr; Previous</a></li>
+		  
+		  
+			<li class="next disabled"><a>Next &rarr;</a>
+		  
+		</ul>
+
+		<hr>
+	</div>
+	
+	<div class="col-sm-2 sidebar-2">
+	
+	</div>
+</article>
+<div class="clearfix"></div>
+
+
+
+
+
+		<footer>
+			<hr/>
+			<p>
+				&copy; 2019 Ryan Jeon
+			</p>
+		</footer>
+	</div>
+
+	<script type="text/javascript" src="/assets/resources/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/app.js"></script>
+</body>
+</html>
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142682001-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
