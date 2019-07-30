@@ -4,6 +4,8 @@
 	<meta charset="utf-8">
 	<title>Writing a programming language (Part 3 Local Variables)</title>
 	
+	<meta name="description" content="It's been more than a month since I posted a last update on my compiler. Even though I had a very hectic month, I was able to make some breakthrough. I was able to implement a basic conditional, arithmetic operations, variable declaration, and function declaration/calls that allowed rlang to finally perform a recursive fibonacci algorithm:">
+	
 	<meta name="author" content="Ryan Jeon">
 
 	<!-- Enable responsive viewport -->
@@ -21,7 +23,7 @@
 	<link href="/assets/css/style.css" rel="stylesheet">
 
 	<!-- Le fav and touch icons -->
-	<link rel="shortcut icon" href="pingu.png">
+	<link rel="shortcut icon" href="/pingu.png">
 	<!--	
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
@@ -176,7 +178,7 @@
     </span><span class="n">Int</span><span class="x"> </span><span class="n">a</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">fib</span><span class="x"> </span><span class="p">(</span><span class="x"> </span><span class="m">1</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="m">1</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="m">0</span><span class="x"> </span><span class="p">,</span><span class="x"> </span><span class="m">5</span><span class="x"> </span><span class="p">)</span><span class="x">
 </span><span class="p">}</span></code></pre></figure>
 
-<p>Above algorithm will print the first 20 numbers in fibonacci sequence. Along this journey, one thing that I found very interesting was how you can use a stack to hold local variables in functions and access the variables using RBP register. Let’s take a look at an example.</p>
+<p>Above algorithm will print the first 20 numbers in fibonacci sequence. Along this journey, one thing that I found very interesting was how you can use the stack to hold local variables in functions and access the variables using RBP register. Let’s take a look at an example.</p>
 
 <figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">Int</span><span class="x"> </span><span class="n">a</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="m">2</span></code></pre></figure>
 
@@ -237,7 +239,7 @@ movq	%rsp, %rbp				   //Update RBP address to top of the stack</code></pre></fig
 </span><span class="n">code</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"movq	%d(%%rbp), %%rax</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="x"> </span><span class="n">index</span><span class="p">)</span><span class="x">
 </span><span class="n">WriteToFile</span><span class="p">(</span><span class="n">code</span><span class="p">)</span></code></pre></figure>
 
-<p>Ain’t that neat? Some of you might ask, why would we use RBP instead of RSP when our RSP will always be point to the top of our stack? I was thinking that too in the beginning. However, it made more sense when I thought about what could happen to RSP as you do more things such as making a function call. When you make a function call, you are pushing a return address to the stack, and within that function call you might be declaring more local variables within that function. Long story short, RSP is too dynamic for it to be a used as a consistent base address to reference local variables on the stack. Thus, making a use of RBP really makes our life easier, since RBP address will always be consistent.</p>
+<p>Ain’t that neat? Some of you might ask, why would we use RBP instead of RSP when our RSP will always be pointing to the top of our stack? I was thinking that too in the beginning. However, it made more sense when I thought about what could happen to RSP as you do more things such as making a function call. When you make a function call, you are pushing a return address to the stack, which will make RSP point to the return address. And during that function call you might be declaring more local variables within that function, and making more function calls which will continuously make RSP inconsistent. Long story short, RSP is too dynamic for it to be used as a consistent base address to reference local variables on the stack. Thus, making a use of RBP really makes our life easier, since RBP address will always be consistent.</p>
 
 <p>There’s still a lot to be done, but I am also having a lot of fun. As always, I will keep you posted on the progress :). Have a good day.</p>
 
