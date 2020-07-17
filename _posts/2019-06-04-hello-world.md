@@ -2,7 +2,7 @@
 layout: post
 title: (SideTrack 0) Prologue
 categories: [general, demo]
-tags: [project, sidetrack]
+tags: [sidetrack]
 description:
 ---
 
