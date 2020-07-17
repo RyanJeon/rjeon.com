@@ -7,6 +7,58 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>(Side Track 2) How do OTP chip cards work?</title>
+				<description>&lt;p&gt;I know it has been a year since I last posted, but here I am! It’s been a hectic year and I am sure 2020 has been a hectic year for you too, whoever is reading this post right now. Well, given the situation right now in the US, few months ago, I have decided to fly back to my home country, South Korea, to be with my family during these uncertain times. Ever since I started college, I have never stayed in Korea for more than two months. However, this time, it’s been almost 4 months staying in Korea consecutively, since 
+I came here while my spring quarter was still in progress. There was no reason for me to stay in the states given that my school 
+had gone entirely remote for that quarter.&lt;/p&gt;
+
+&lt;p&gt;Staying in Korea for this long, I’ve experienced and seen many new things. Perhaps some of those things were not new to me, but 
+I simply didn’t pay attention to them before. Out of all the new things I’ve seen in Korea, one of the more intriguing things 
+I saw was my mom’s OTP card.&lt;/p&gt;
+
+&lt;p&gt;So here’s a short story about how I came to encounter this maginificent piece of technology ( I will stop babbling after this. I promise :D ). One day, while I was at home, my mom called me and asked me to find a card that says “OTP” in her wallet. 
+When I found the card I immidiately realized that this card was not just an ordinary card. It had a little button on the bottom corner and a small screen on the top just like the picture below. I was then told to press the button, and read the number 
+that appeared in the small screen. When I pressed the button on the card, indeed some 7 digit number appeared on the screen. 
+I asked her what she needed this number for, and she told me that she needs the number to access her bank account. That entire 
+day, I couldn’t stop thinking about this damn card.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3-us-west-2.amazonaws.com/go-medici/uploads/2015/12/Axis-Bank-Display-Debit-Card.png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I’ll be honest, I am not the brightest guy in the world, if you didn’t figure that out already from my other posts. Because 
+of this I had many dumb questions pop up in my head, such as, “If OTP means one-time password, how a simple card keep generating 
+some random password?”, “Is this card connected to some server? How does the bank know about this number if the number 
+is a randomly generated password?” and “Is this some kind of a sorcery?” I was baffled. I tried to figure things out on my 
+own, but I knew it was a waste of time given my limited knowledge on technology. So I decided to do some research, and here’s 
+what I found.&lt;/p&gt;
+
+&lt;p&gt;This particular card that my mom is using, was using the Time-based One-Time Password (TOTP). About every 20 seconds, when you 
+press the button, the card would generate a new number. The card has an OTP chip inside, that uses a time based pseudo-random 
+algorithm to generate a number that is shared with the bank’s remote server. The card is not connected to any server, let alone 
+to the internet. That would be kind of weird, but cool. Bank’s server knows what number the card will generate based on the 
+algorithm the chip is using. Apparently, to prevent situations where there might be a slight time differences between the card 
+and the server, the server might allow about to one or two most recent keys generated.&lt;/p&gt;
+
+&lt;p&gt;So how does the card keep generating these numbers if there’s no way to charge it? Well, it turns out there’s a small battery 
+embedded in the card that can last a few years before it runs out. When the card dies, you can simply get it replaced at 
+your bank.&lt;/p&gt;
+
+&lt;p&gt;While I found this cool, it turns out that using the OTP hardware increases the frequency of payment failures, which could 
+impact the banks overall revenue. Because of this, many banks in US prefer to send the OTP via SMS or email, eventhough 
+that might introduce new potential security concerns.&lt;/p&gt;
+
+&lt;p&gt;This is all I’ve got for now, but I want to dig deeper into this. I would like to know what are some benefits you can get 
+in terms of security and fraud prevention when you are using hardware based OTP instead of the alternative. It would 
+also be interesting to learn more about how the OTP hardware actually works, and how these algorithms work to sychronize the 
+cards and the server.&lt;/p&gt;
+
+&lt;p&gt;There are so much more to learn, but so little time. Sigh.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 17 Jul 2020 00:00:00 +0900</pubDate>
+				<link>/general/2020/07/17/side2.html</link>
+				<guid isPermaLink="true">/general/2020/07/17/side2.html</guid>
+			</item>
+		
+			<item>
 				<title>Writing a programming language (Part 3 Local Variables)</title>
 				<description>&lt;p&gt;&lt;a href=&quot;https://github.com/RyanJeon/RyanLang&quot;&gt;Compiler Repo&lt;/a&gt;&lt;/p&gt;
 
@@ -91,7 +143,7 @@ movq	%rsp, %rbp				   //Update RBP address to top of the stack&lt;/code&gt;&lt;/
 
 &lt;p&gt;There’s still a lot to be done, but I am also having a lot of fun. As always, I will keep you posted on the progress :). Have a good day.&lt;/p&gt;
 </description>
-				<pubDate>Sat, 27 Jul 2019 00:00:00 -0700</pubDate>
+				<pubDate>Sat, 27 Jul 2019 00:00:00 +0900</pubDate>
 				<link>/general/coding/2019/07/27/compiler3.html</link>
 				<guid isPermaLink="true">/general/coding/2019/07/27/compiler3.html</guid>
 			</item>
@@ -138,7 +190,7 @@ syntax tree generator, grammar classifier, and code generator. Today I will talk
 
 &lt;p&gt;Besides, some simple helper functions to classify keyword types, this is pretty much all I have for the lexer for now. I will keep you all posted on the progress :)&lt;/p&gt;
 </description>
-				<pubDate>Sun, 23 Jun 2019 00:00:00 -0700</pubDate>
+				<pubDate>Sun, 23 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/coding/2019/06/23/compiler2.html</link>
 				<guid isPermaLink="true">/general/coding/2019/06/23/compiler2.html</guid>
 			</item>
@@ -176,7 +228,7 @@ the grammar that your compiler follows, the parser will produce a corresponding 
 compiled down to an executable that you can run on your machine. I am planning to follow this 
 structure closely. Let’s see what we get :).&lt;/p&gt;
 </description>
-				<pubDate>Mon, 10 Jun 2019 00:00:00 -0700</pubDate>
+				<pubDate>Mon, 10 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/coding/2019/06/10/compiler1.html</link>
 				<guid isPermaLink="true">/general/coding/2019/06/10/compiler1.html</guid>
 			</item>
@@ -224,14 +276,14 @@ port that will be used on your VM instance to be fowarded to your Pi’s port 22
 &lt;p&gt;That’s it! Now just simply SSH into the port that you chose, and you can now access your Pi from anywhere around the world as long as 
 your Pi is running and safe at home. Happy hacking!&lt;/p&gt;
 </description>
-				<pubDate>Thu, 06 Jun 2019 00:00:00 -0700</pubDate>
+				<pubDate>Thu, 06 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/demo/2019/06/06/ssh-raspberrypi.html</link>
 				<guid isPermaLink="true">/general/demo/2019/06/06/ssh-raspberrypi.html</guid>
 			</item>
 		
 			<item>
 				<title>(SideTrack 1) File Polyglot</title>
-				<description>&lt;p&gt;&lt;img src=&quot;http://illusion-investigation.weebly.com/uploads/2/4/2/2/24222135/6476083.jpg?306&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+				<description>&lt;p&gt;&lt;img src=&quot;https://illusion-investigation.weebly.com/uploads/2/4/2/2/24222135/6476083.jpg?306&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;During my usual sidetrack, I stumbled upon a quite amusing video through my colleague. 
 The video was covering a section of &lt;a href=&quot;https://nostarch.com/gtfo&quot;&gt;PoC || GTFO&lt;/a&gt;, which 
@@ -259,7 +311,7 @@ the general format of GIF that I got from a &lt;a href=&quot;https://www.filefor
 
 &lt;p&gt;As you can see, GIF file always start with a header signature “GIF” followed by 
 the GIF format version. Notice that these 6 bytes can be used as a valid JavaScript 
-variable? Even though we do not know if other succeeding bytes can be validly interpreted in common JavaScript compilers, we are certain that the first 6 bytes 
+variable? Even though we do not know if other succeeding bytes can be validly interpreted in common browsers like Chrome or Firefox, we are certain that the first 6 bytes 
 will always be a valid JavaScript variable name. This means that we are good to go 
 as long as we can bypass the other bytes. The fact that the screen width comes right 
 after our golden 6 bytes is the key, because we can define the screen width with any 
@@ -289,13 +341,13 @@ following HTML code will render our GIF, pop up an alert box, and log out ‘:)�
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;And we are done … But are we? What if there are bytes in the middle of the image that 
-can translate into ‘*/’? This would surely break our method, because ‘/* */ */’ is not a valid JavaScript Syntax. Turns out, you will probably encounter ‘*/’ in the 
+can translate into ‘*/’? This would surely break our method, because ‘/* */ */’ is not a valid JavaScript syntax and whatever that comes after the comment will not execute. Turns out, you will probably encounter bytes equivalent to ‘*/’ in the 
 middle of the image in most GIFs, given how many bytes there are in a common GIF file. 
 My attempt to bypass by removing and replacing the problematic bytes failed miserably, 
 as it corrupted the file enough to make it look glitchy. Perhaps this doesn’t matter in most use cases of such polyglot, because it still will be intepreted as GIF with a valid header and successfully deliver desired scripts as long as there’s no &lt;a href=&quot;https://en.wikipedia.org/wiki/Content_Disarm_%26_Reconstruction&quot;&gt;CDR&lt;/a&gt; present. Anyways, &lt;a href=&quot;https://github.com/RyanJeon/Polyglot&quot;&gt;here&lt;/a&gt; is the code that I wrote to assist generating polyglot files. Hope you found 
 this fun to explore as well.&lt;/p&gt;
 </description>
-				<pubDate>Wed, 05 Jun 2019 00:00:00 -0700</pubDate>
+				<pubDate>Wed, 05 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/demo/2019/06/05/side1.html</link>
 				<guid isPermaLink="true">/general/demo/2019/06/05/side1.html</guid>
 			</item>
@@ -313,7 +365,7 @@ or not, I hope you will find them amusing. Welcome to my sidetracks.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg&quot; alt=&quot;gopher&quot; /&gt;&lt;/p&gt;
 </description>
-				<pubDate>Tue, 04 Jun 2019 00:00:00 -0700</pubDate>
+				<pubDate>Tue, 04 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/demo/2019/06/04/hello-world.html</link>
 				<guid isPermaLink="true">/general/demo/2019/06/04/hello-world.html</guid>
 			</item>

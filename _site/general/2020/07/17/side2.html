@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Writing a programming language (Part 1 Layout)</title>
+	<title>(Side Track 2) How do OTP chip cards work?</title>
 	
 	<meta name="author" content="Ryan Jeon">
 
@@ -143,7 +143,7 @@
 
 	<div class="col-sm-9 col-sm-offset-3">
 		<div class="page-header">
-  <h1>Writing a programming language (Part 1 Layout) </h1>
+  <h1>(Side Track 2) How do OTP chip cards work? </h1>
 </div>
 
 
@@ -152,42 +152,56 @@
 	<div class="col-sm-10">
 	 <span class="post-date">
 	   
-	   June 
-	   10th,
+	   July 
+	   17th,
 	   
-	   2019
+	   2020
 	 </span>
 	  <div class="article_body" style="font-size: 20px">
-	  <p>Some people say they either don’t have enough time to work on side projects  or actually do not have time to work on them. 
-But this is not the case for me. Turns out I have a lot of time just laying around so I decided to work on something big that 
-I can learn a bunch from. It didn’t take me long until I decided to learn how to create my own programming language. How did I 
-arrive at that? I mean, I would definitely learn a lot from working on a compiler and having my own programming language sounds 
-exciting doesn’t it? A few weeks back I started learning Golang. So I decided to write my language in Golang.</p>
+	  <p>I know it has been a year since I last posted, but here I am! It’s been a hectic year and I am sure 2020 has been a hectic year for you too, whoever is reading this post right now. Well, given the situation right now in the US, few months ago, I have decided to fly back to my home country, South Korea, to be with my family during these uncertain times. Ever since I started college, I have never stayed in Korea for more than two months. However, this time, it’s been almost 4 months staying in Korea consecutively, since 
+I came here while my spring quarter was still in progress. There was no reason for me to stay in the states given that my school 
+had gone entirely remote for that quarter.</p>
 
-<p>First, I researched how I should structure my compiler. Here is a good compiler diagram that I found online:
-<img src="https://cdn-images-1.medium.com/max/800/1*ttOYPPL-XJIf4zVZQUBzsQ.jpeg" alt="compiler" /></p>
+<p>Staying in Korea for this long, I’ve experienced and seen many new things. Perhaps some of those things were not new to me, but 
+I simply didn’t pay attention to them before. Out of all the new things I’ve seen in Korea, one of the more intriguing things 
+I saw was my mom’s OTP card.</p>
 
-<p>Following this diagram, you pass in a piece of code to a compiler, and the input goes through a Lexer, where 
-the input string split into keyword strings, that are then turn into tokens that will contain information about the keywords. For example, if you have 
-a piece of code like:</p>
+<p>So here’s a short story about how I came to encounter this maginificent piece of technology ( I will stop babbling after this. I promise :D ). One day, while I was at home, my mom called me and asked me to find a card that says “OTP” in her wallet. 
+When I found the card I immidiately realized that this card was not just an ordinary card. It had a little button on the bottom corner and a small screen on the top just like the picture below. I was then told to press the button, and read the number 
+that appeared in the small screen. When I pressed the button on the card, indeed some 7 digit number appeared on the screen. 
+I asked her what she needed this number for, and she told me that she needs the number to access her bank account. That entire 
+day, I couldn’t stop thinking about this damn card.</p>
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre></figure>
+<p><img src="https://s3-us-west-2.amazonaws.com/go-medici/uploads/2015/12/Axis-Bank-Display-Debit-Card.png" alt="image" /></p>
 
-<p>One example output that a Lexer might produce is “print”, “(“, “1”, “+”, “1”, “)”. These strings 
-can be then turned into tokens. An example of list of tokens you could make from this list of 
-strings might be:</p>
+<p>I’ll be honest, I am not the brightest guy in the world, if you didn’t figure that out already from my other posts. Because 
+of this I had many dumb questions pop up in my head, such as, “If OTP means one-time password, how a simple card keep generating 
+some random password?”, “Is this card connected to some server? How does the bank know about this number if the number 
+is a randomly generated password?” and “Is this some kind of a sorcery?” I was baffled. I tried to figure things out on my 
+own, but I knew it was a waste of time given my limited knowledge on technology. So I decided to do some research, and here’s 
+what I found.</p>
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">[{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"print"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Function"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"("</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Operator"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"1"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Integer"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"+"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Operator"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">"1"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Integer"</span><span class="p">},</span> <span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="s">")"</span><span class="p">,</span> <span class="n">Type</span><span class="o">:</span> <span class="s">"Operator"</span><span class="p">}]</span></code></pre></figure>
+<p>This particular card that my mom is using, was using the Time-based One-Time Password (TOTP). About every 20 seconds, when you 
+press the button, the card would generate a new number. The card has an OTP chip inside, that uses a time based pseudo-random 
+algorithm to generate a number that is shared with the bank’s remote server. The card is not connected to any server, let alone 
+to the internet. That would be kind of weird, but cool. Bank’s server knows what number the card will generate based on the 
+algorithm the chip is using. Apparently, to prevent situations where there might be a slight time differences between the card 
+and the server, the server might allow about to one or two most recent keys generated.</p>
 
-<p>The way you design your token is entirely upto how you want to design your compiler.</p>
+<p>So how does the card keep generating these numbers if there’s no way to charge it? Well, it turns out there’s a small battery 
+embedded in the card that can last a few years before it runs out. When the card dies, you can simply get it replaced at 
+your bank.</p>
 
-<p>Then these tokens will get sent to the parser, where AST (Abstract Syntax Tree) will be generated with the given tokens. Depending on 
-the grammar that your compiler follows, the parser will produce a corresponding AST. An example of AST of above example might look like: 
-<img src="https://i.imgur.com/eG3FJgW.png?1" alt="AST" /></p>
+<p>While I found this cool, it turns out that using the OTP hardware increases the frequency of payment failures, which could 
+impact the banks overall revenue. Because of this, many banks in US prefer to send the OTP via SMS or email, eventhough 
+that might introduce new potential security concerns.</p>
 
-<p>Finally, this AST will be interpreted and produce a corresponding assembly, which can be 
-compiled down to an executable that you can run on your machine. I am planning to follow this 
-structure closely. Let’s see what we get :).</p>
+<p>This is all I’ve got for now, but I want to dig deeper into this. I would like to know what are some benefits you can get 
+in terms of security and fraud prevention when you are using hardware based OTP instead of the alternative. It would 
+also be interesting to learn more about how the OTP hardware actually works, and how these algorithms work to sychronize the 
+cards and the server.</p>
+
+<p>There are so much more to learn, but so little time. Sigh.</p>
 
 	  </div>
 
@@ -199,11 +213,6 @@ structure closely. Let’s see what we get :).</p>
 			 
 				<li><a href="/categories.html#general-ref">
 					general <span>(7)</span>
-					,
-				</a></li>
-			 
-				<li><a href="/categories.html#coding-ref">
-					coding <span>(3)</span>
 					
 				</a></li>
 			
@@ -225,8 +234,8 @@ structure closely. Let’s see what we get :).</p>
 				</li>
 			 
 				<li>
-					<a href="/tags.html#compiler-ref">
-					compiler <span>(3)</span>
+					<a href="/tags.html#sidetrack-ref">
+					sidetrack <span>(3)</span>
 					
 					</a>
 				</li>
@@ -241,7 +250,7 @@ structure closely. Let’s see what we get :).</p>
 		<div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Writing a programming language (Part 1 Layout)"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=(Side Track 2) How do OTP chip cards work?"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -269,10 +278,10 @@ structure closely. Let’s see what we get :).</p>
 
 		<ul class="pager">
 		  
-		  <li class="previous"><a href="/general/demo/2019/06/06/ssh-raspberrypi.html" title="SSH into RaspberryPi through GCP VM instance">&larr; Previous</a></li>
+		  <li class="previous"><a href="/general/coding/2019/07/27/compiler3.html" title="Writing a programming language (Part 3 Local Variables)">&larr; Previous</a></li>
 		  
 		  
-		  <li class="next"><a href="/general/coding/2019/06/23/compiler2.html" title="Writing a programming language (Part 2 Lexer)">Next &rarr;</a></li>
+			<li class="next disabled"><a>Next &rarr;</a>
 		  
 		</ul>
 

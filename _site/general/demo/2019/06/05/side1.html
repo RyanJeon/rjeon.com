@@ -158,7 +158,7 @@
 	   2019
 	 </span>
 	  <div class="article_body" style="font-size: 20px">
-	  <p><img src="http://illusion-investigation.weebly.com/uploads/2/4/2/2/24222135/6476083.jpg?306" alt="image" /></p>
+	  <p><img src="https://illusion-investigation.weebly.com/uploads/2/4/2/2/24222135/6476083.jpg?306" alt="image" /></p>
 
 <p>During my usual sidetrack, I stumbled upon a quite amusing video through my colleague. 
 The video was covering a section of <a href="https://nostarch.com/gtfo">PoC || GTFO</a>, which 
@@ -186,7 +186,7 @@ the general format of GIF that I got from a <a href="https://www.fileformat.info
 
 <p>As you can see, GIF file always start with a header signature “GIF” followed by 
 the GIF format version. Notice that these 6 bytes can be used as a valid JavaScript 
-variable? Even though we do not know if other succeeding bytes can be validly interpreted in common JavaScript compilers, we are certain that the first 6 bytes 
+variable? Even though we do not know if other succeeding bytes can be validly interpreted in common browsers like Chrome or Firefox, we are certain that the first 6 bytes 
 will always be a valid JavaScript variable name. This means that we are good to go 
 as long as we can bypass the other bytes. The fact that the screen width comes right 
 after our golden 6 bytes is the key, because we can define the screen width with any 
@@ -216,7 +216,7 @@ following HTML code will render our GIF, pop up an alert box, and log out ‘:)�
     <span class="nt">&lt;/html&gt;</span></code></pre></figure>
 
 <p>And we are done … But are we? What if there are bytes in the middle of the image that 
-can translate into ‘*/’? This would surely break our method, because ‘/* */ */’ is not a valid JavaScript Syntax. Turns out, you will probably encounter ‘*/’ in the 
+can translate into ‘*/’? This would surely break our method, because ‘/* */ */’ is not a valid JavaScript syntax and whatever that comes after the comment will not execute. Turns out, you will probably encounter bytes equivalent to ‘*/’ in the 
 middle of the image in most GIFs, given how many bytes there are in a common GIF file. 
 My attempt to bypass by removing and replacing the problematic bytes failed miserably, 
 as it corrupted the file enough to make it look glitchy. Perhaps this doesn’t matter in most use cases of such polyglot, because it still will be intepreted as GIF with a valid header and successfully deliver desired scripts as long as there’s no <a href="https://en.wikipedia.org/wiki/Content_Disarm_%26_Reconstruction">CDR</a> present. Anyways, <a href="https://github.com/RyanJeon/Polyglot">here</a> is the code that I wrote to assist generating polyglot files. Hope you found 
@@ -231,7 +231,7 @@ this fun to explore as well.</p>
 		  
 			 
 				<li><a href="/categories.html#general-ref">
-					general <span>(6)</span>
+					general <span>(7)</span>
 					,
 				</a></li>
 			 
@@ -252,14 +252,14 @@ this fun to explore as well.</p>
 			 
 				<li>
 					<a href="/tags.html#project-ref">
-					project <span>(6)</span>
+					project <span>(7)</span>
 					,
 					</a>
 				</li>
 			 
 				<li>
 					<a href="/tags.html#sidetrack-ref">
-					sidetrack <span>(2)</span>
+					sidetrack <span>(3)</span>
 					
 					</a>
 				</li>
@@ -325,7 +325,7 @@ this fun to explore as well.</p>
 		<footer>
 			<hr/>
 			<p>
-				&copy; 2019 Ryan Jeon
+				&copy; 2020 Ryan Jeon
 			</p>
 		</footer>
 	</div>
