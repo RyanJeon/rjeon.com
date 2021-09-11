@@ -7,6 +7,30 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>My journey so far with Immigo</title>
+				<description>&lt;p&gt;The time was the summer of 2020, when I decided to fly to Korea to be with my family after my internship was canceled from COVID-19. Thinking that I need to do something to make the summer useful, I decided to start a side project with my co-founder/sister Chelsea to add to our experience. We soon found a problem that we were already quite familiar with, which was around English teacher recruitment in Korea, and started to make a website to tackle this problem. Little did I know, what started out as a mere side project became something that would be the biggest pivotal point in my life.&lt;/p&gt;
+
+&lt;p&gt;As the website we developed started to get unexpectedly large traction, and love from our users we thought that we could maybe take this even further and possibly run this as a business. This is when we decided to apply to Techstars and YC. After a series of interviews against all odds, we somehow managed our way into Techstars.&lt;/p&gt;
+
+&lt;p&gt;After graduating college at the end of 2020, I dove right into the unknowns of the startup world with only 3 internships experience under my belt with no prior venture experience. Over the 3 months going through Techstars, I’ve done and experienced things that I never have before, and am still learning valuable skills everyday.&lt;/p&gt;
+
+&lt;p&gt;Coming out of Techstars, we decided to pivot out of our original idea given various challenges (which I will get into in another post :D), into a peer-to-peer fluency focused English learning platform, where learners can quickly find the right cohort of peers to practice with through enrolling in a structured English course.&lt;/p&gt;
+
+&lt;p&gt;Over the last few months after pivoting, we have already finished a course with 100% retention rate with 1200 students from 67 countries in our course waitlist partnering up with 6 YouTube/Udemy instructors who have in total over 2M followers combined. On the other side of the frontline, we are also training ESL engineers to speak better English using our Immigo method, in which we were able to sign a $4500 deal with a coding bootcamp Holberton School.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://immigoimages.s3.amazonaws.com/Welcomecall.png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Snippet of our students from one of our courses&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Things have been rough, but I’ve been pushing through to make small progress everyday. I’m excited to see what will come out of this journey, and I hope you are too. Stay tuned for more :)&lt;/p&gt;
+</description>
+				<pubDate>Sat, 11 Sep 2021 00:00:00 +0900</pubDate>
+				<link>/startup%20journey/2021/09/11/startup-journey.html</link>
+				<guid isPermaLink="true">/startup%20journey/2021/09/11/startup-journey.html</guid>
+			</item>
+		
+			<item>
 				<title>(Short Story) The Collector</title>
 				<description>&lt;p style=&quot;text-align: center;&quot;&gt;The Collector&lt;/p&gt;
 
@@ -54,7 +78,7 @@
     Glory to the state! I could not emphasize more how thankful I am for this opportunity to contribute to such a great cause to help our state succeed and help our fellow comrades. Oh how lucky I am! It is another beautiful day to work and things could not be more perfect: A gentle breeze drying off sweats on my forehead, comforting warmth from the sunshine, and friendly neighbors greeting me with affectionate smiles as I run down the hallway to get to the next room. 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-				<pubDate>Tue, 22 Sep 2020 00:00:00 -0400</pubDate>
+				<pubDate>Tue, 22 Sep 2020 00:00:00 +0900</pubDate>
 				<link>/short%20story/2020/09/22/short-story-1.html</link>
 				<guid isPermaLink="true">/short%20story/2020/09/22/short-story-1.html</guid>
 			</item>
@@ -106,7 +130,7 @@ cards and the server.&lt;/p&gt;
 
 &lt;p&gt;There are so much more to learn, but so little time. Sigh.&lt;/p&gt;
 </description>
-				<pubDate>Fri, 17 Jul 2020 00:00:00 -0400</pubDate>
+				<pubDate>Fri, 17 Jul 2020 00:00:00 +0900</pubDate>
 				<link>/general/2020/07/17/side2.html</link>
 				<guid isPermaLink="true">/general/2020/07/17/side2.html</guid>
 			</item>
@@ -196,7 +220,7 @@ movq	%rsp, %rbp				   //Update RBP address to top of the stack&lt;/code&gt;&lt;/
 
 &lt;p&gt;There’s still a lot to be done, but I am also having a lot of fun. As always, I will keep you posted on the progress :). Have a good day.&lt;/p&gt;
 </description>
-				<pubDate>Sat, 27 Jul 2019 00:00:00 -0400</pubDate>
+				<pubDate>Sat, 27 Jul 2019 00:00:00 +0900</pubDate>
 				<link>/general/coding/2019/07/27/compiler3.html</link>
 				<guid isPermaLink="true">/general/coding/2019/07/27/compiler3.html</guid>
 			</item>
@@ -243,7 +267,7 @@ syntax tree generator, grammar classifier, and code generator. Today I will talk
 
 &lt;p&gt;Besides, some simple helper functions to classify keyword types, this is pretty much all I have for the lexer for now. I will keep you all posted on the progress :)&lt;/p&gt;
 </description>
-				<pubDate>Sun, 23 Jun 2019 00:00:00 -0400</pubDate>
+				<pubDate>Sun, 23 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/coding/2019/06/23/compiler2.html</link>
 				<guid isPermaLink="true">/general/coding/2019/06/23/compiler2.html</guid>
 			</item>
@@ -281,7 +305,7 @@ the grammar that your compiler follows, the parser will produce a corresponding 
 compiled down to an executable that you can run on your machine. I am planning to follow this 
 structure closely. Let’s see what we get :).&lt;/p&gt;
 </description>
-				<pubDate>Mon, 10 Jun 2019 00:00:00 -0400</pubDate>
+				<pubDate>Mon, 10 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/coding/2019/06/10/compiler1.html</link>
 				<guid isPermaLink="true">/general/coding/2019/06/10/compiler1.html</guid>
 			</item>
@@ -329,7 +353,7 @@ port that will be used on your VM instance to be fowarded to your Pi’s port 22
 &lt;p&gt;That’s it! Now just simply SSH into the port that you chose, and you can now access your Pi from anywhere around the world as long as 
 your Pi is running and safe at home. Happy hacking!&lt;/p&gt;
 </description>
-				<pubDate>Thu, 06 Jun 2019 00:00:00 -0400</pubDate>
+				<pubDate>Thu, 06 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/demo/2019/06/06/ssh-raspberrypi.html</link>
 				<guid isPermaLink="true">/general/demo/2019/06/06/ssh-raspberrypi.html</guid>
 			</item>
@@ -400,7 +424,7 @@ My attempt to bypass by removing and replacing the problematic bytes failed mise
 as it corrupted the file enough to make it look glitchy. Perhaps this doesn’t matter in most use cases of such polyglot, because it still will be intepreted as GIF with a valid header and successfully deliver desired scripts as long as there’s no &lt;a href=&quot;https://en.wikipedia.org/wiki/Content_Disarm_%26_Reconstruction&quot;&gt;CDR&lt;/a&gt; present. Anyways, &lt;a href=&quot;https://github.com/RyanJeon/Polyglot&quot;&gt;here&lt;/a&gt; is the code that I wrote to assist generating polyglot files. Hope you found 
 this fun to explore as well.&lt;/p&gt;
 </description>
-				<pubDate>Wed, 05 Jun 2019 00:00:00 -0400</pubDate>
+				<pubDate>Wed, 05 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/demo/2019/06/05/side1.html</link>
 				<guid isPermaLink="true">/general/demo/2019/06/05/side1.html</guid>
 			</item>
@@ -418,7 +442,7 @@ or not, I hope you will find them amusing. Welcome to my sidetracks.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://www.gardendesign.com/pictures/images/400x320Exact_0x0/dream-team-s-portland-garden_6/gopher-pocket-gopher-shutterstock-com_13178.jpg&quot; alt=&quot;gopher&quot; /&gt;&lt;/p&gt;
 </description>
-				<pubDate>Tue, 04 Jun 2019 00:00:00 -0400</pubDate>
+				<pubDate>Tue, 04 Jun 2019 00:00:00 +0900</pubDate>
 				<link>/general/demo/2019/06/04/hello-world.html</link>
 				<guid isPermaLink="true">/general/demo/2019/06/04/hello-world.html</guid>
 			</item>
